@@ -15,7 +15,23 @@ int main()
 #endif
     int n;
     cin >> n;
-    cout << n;
+//    cout << n;
+    int arr[n];
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> arr[i];
+    }
+    int maxi = -1;
+    int mini = 1e9;
+    for (int i = 0; i < n; ++i)
+    {
+        if (arr[i] > maxi)
+            maxi = arr[i];
+        if (arr[i] < mini)
+            mini = arr[i];
+    }
+    cout << abs(maxi - mini) << endl;
+    return 0;
 
 
 }
