@@ -23,35 +23,35 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    int b;
+    ci(b);
+    vi boys(b);
+    for (int i = 0; i < b; ++i)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
-        return 0;
+        cin >> boys[i];
     }
-
-    for (i = 0; i < m; i++)
+    int g;
+    ci(g);
+    vi girls(g);
+    for (int i = 0; i < g; ++i)
     {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
+        cin >> girls[i];
     }
-
-    if (s > 0)
+    sort(boys.begin(), boys.end());
+    sort(girls.begin(), girls.end());
+    ll res = 0;
+    for (int i = 0; i < b; i++)
     {
-        cout << "-1 -1" << endl;
-        return 0;
+        for (int j = 0; j < g; ++j)
+        {
+            if (abs(boys[i] - girls[j]) <= 1)
+            {
+                girls[j] = -100; //taken.
+                res++;
+                break;
+            }
+        }
     }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    cout << res << nl;
     return 0;
 }

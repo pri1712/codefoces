@@ -23,35 +23,15 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    ll n;
+    ci(n);
+    for (ll a = 2; a * a <= n; a++)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
-        return 0;
+        while (n % (a * a) == 0 && n != 0)
+        {
+            n /= a;
+        }
     }
-
-    for (i = 0; i < m; i++)
-    {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
-    }
-
-    if (s > 0)
-    {
-        cout << "-1 -1" << endl;
-        return 0;
-    }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    cout << n << nl;
     return 0;
 }

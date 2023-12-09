@@ -4,7 +4,6 @@
 #include <cmath>
 #include <map>
 #define ci(n) cin>>n;
-#define nl '\n';
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -23,35 +22,37 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    int n;
+    ci(n);
+    if (n % 2 == 0)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
+        cout << -1 << endl;
         return 0;
     }
-
-    for (i = 0; i < m; i++)
+    vl a(n), b(n), c(n);
+    for (int i = 0; i < n; i++)
     {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
+        a[i] = i;
+        b[i] = i;
     }
-
-    if (s > 0)
+    for (auto it : a)
     {
-        cout << "-1 -1" << endl;
-        return 0;
+        cout << it << " ";
     }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    cout << endl;
+    for (auto it : b)
+    {
+        cout << it << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < n; i++)
+    {
+        c[i] = (a[i] + b[i]) % n;
+    }
+    for (auto it : c)
+    {
+        cout << it << " ";
+    }
+    cout << endl;
     return 0;
 }

@@ -23,35 +23,23 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    int n;
+    ci(n);
+    unmap xmap;
+    unmap ymap;
+    map < pair<int, int>, int> mp;
+    ll res = 0;
+    for (int i = 0; i < n; ++i)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
-        return 0;
+        ll x, y;
+        cin >> x >> y;
+        res += xmap[x];
+        xmap[x]++;
+        res += ymap[y];
+        ymap[y]++;
+        res -= mp[ {x, y}];
+        mp[ {x, y}]++;
     }
-
-    for (i = 0; i < m; i++)
-    {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
-    }
-
-    if (s > 0)
-    {
-        cout << "-1 -1" << endl;
-        return 0;
-    }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    cout << res << nl;
     return 0;
 }

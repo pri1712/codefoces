@@ -3,8 +3,6 @@
 #include <vector>
 #include <cmath>
 #include <map>
-#define ci(n) cin>>n;
-#define nl '\n';
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -23,35 +21,18 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    string res = "";
+    string arr[10] = {"", "", "2", "3", "223", "5", "53", "7", "7222", "7332"};
+    for (int i = 0; i < (int)s.size(); ++i)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
-        return 0;
+        res += arr[s[i] - '0'];
     }
-
-    for (i = 0; i < m; i++)
-    {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
-    }
-
-    if (s > 0)
-    {
-        cout << "-1 -1" << endl;
-        return 0;
-    }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    std::sort(res.begin(), res.end());
+    std::reverse(res.begin(), res.end());
+    cout << res << endl;
     return 0;
 }

@@ -3,8 +3,6 @@
 #include <vector>
 #include <cmath>
 #include <map>
-#define ci(n) cin>>n;
-#define nl '\n';
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -13,7 +11,7 @@ typedef std::unordered_map<int, int> unmap;
 typedef std::unordered_set<int> unset;
 typedef std::unordered_set<char> unsetc;
 using namespace std;
-int mod = 1e9 + 7;
+int n;
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -23,35 +21,27 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    int cur = 0;
+    int r, g, b;
+    int R, G, B;
+    cin >> r >> g >> b;
+    if (r <= 2 && g <= 2 && b <= 2)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
+        cout << min({r, g, b}) << endl;
         return 0;
     }
-
-    for (i = 0; i < m; i++)
+    else
     {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
+        cur = r / 3 + g / 3 + b / 3;
+        R = r % 3;
+        G = g % 3;
+        B = b % 3;
+        cur += min({R, G, B});
     }
-
-    if (s > 0)
+    if (R == 2 && G == 2 && B == 0 && b != 0 || B == 2 && G == 2 && R == 0 && r != 0 || R == 2 && B == 2 && G == 0 && g != 0)
     {
-        cout << "-1 -1" << endl;
-        return 0;
+        cur += 1;
     }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    cout << cur << endl;
     return 0;
 }

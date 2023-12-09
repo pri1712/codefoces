@@ -1,10 +1,9 @@
+//AC
 #include <bits/stdc++.h>
 #include <algorithm>
 #include <vector>
 #include <cmath>
 #include <map>
-#define ci(n) cin>>n;
-#define nl '\n';
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -13,7 +12,7 @@ typedef std::unordered_map<int, int> unmap;
 typedef std::unordered_set<int> unset;
 typedef std::unordered_set<char> unsetc;
 using namespace std;
-int mod = 1e9 + 7;
+int n;
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -23,35 +22,29 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    int t;
+    cin >> t;
+    while (t--)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
-        return 0;
+        string s;
+        cin >> s;
+        char ogf = s[0];
+        char ogs = s[1];
+        for (char i = '1'; i <= '8'; i++)
+        {
+            if (i == ogs)
+                continue;
+            s[1] = i;
+            cout << s << endl;
+        }
+        s[1] = ogs;
+        for (char c = 'a'; c <= 'h'; c++)
+        {
+            if (c == ogf)
+                continue;
+            s[0] = c;
+            cout << s << endl;
+        }
     }
-
-    for (i = 0; i < m; i++)
-    {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
-    }
-
-    if (s > 0)
-    {
-        cout << "-1 -1" << endl;
-        return 0;
-    }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
     return 0;
 }

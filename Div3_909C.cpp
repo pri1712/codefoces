@@ -1,4 +1,4 @@
-//got hacked
+//AC
 
 #include <bits/stdc++.h>
 #include <algorithm>
@@ -43,14 +43,16 @@ int main()
         cin >> n;
         res = 0;
         arr.resize(n, 0);
+        ll maxi = LLONG_MIN;
         for (int i = 0; i < n; i++)
         {
             cin >> arr[i];
+            maxi = max(maxi, arr[i]);
         }
-        if (arr.size() == 1)
+        if (maxi < 0)
         {
-            cout << arr[0] << endl;
-            continue;
+            cout << maxi << endl;
+            continue; //for the case when we have all the array numbers to be<0
         }
         int prev = 0;
         for (int i = 1; i < n; i++)

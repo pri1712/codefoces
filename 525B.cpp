@@ -3,8 +3,6 @@
 #include <vector>
 #include <cmath>
 #include <map>
-#define ci(n) cin>>n;
-#define nl '\n';
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -23,35 +21,33 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int m, s, t, i;
-    cin >> m >> s;
-    string a, b;
-
-    if (s == 0)
+    string s;
+    cin >> s;
+    int m;
+    cin >> m;
+    int n = (int)s.size();
+    vi swp(n);
+    for (int i = 0; i < m; ++i)
     {
-        cout << (m == 1 ? "0 0" : "-1 -1") << endl;
-        return 0;
+        int x;
+        cin >> x;
+        swp[x - 1]++;
     }
-
-    for (i = 0; i < m; i++)
+    // for (auto it : swp)
+    //     cout << it << endl;
+    //swp holds the number of swaps requested at the poisiton i.
+    for (int i = 0; i < (int)swp.size() / 2; i++)
     {
-        t = min(s, 9);
-        b += t + '0';
-        s -= t;
+        if (i > 0)
+        {
+            swp[i] += swp[i - 1];
+        }
+        if (swp[i] & 1)
+        {
+            int r = (int)s.size() - i - 1;
+            std::swap(s[i], s[r]);
+        }
     }
-
-    if (s > 0)
-    {
-        cout << "-1 -1" << endl;
-        return 0;
-    }
-
-    for (i = m - 1; i >= 0; i--)
-        a += b[i];
-
-    for (i = 0; a[i] == '0'; i++);
-
-    a[i]--, a[0]++;
-    cout << a << " " << b << endl;
+    cout << s << endl;
     return 0;
 }
