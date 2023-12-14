@@ -4,33 +4,21 @@
 #include <cmath>
 #include <map>
 #define ci(n) cin>>n;
-#define nl '\n';
 #define co(n) cout<<n;
+#define nl '\n';
 #define LLMAX LLONG_MAX;
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
+typedef std::vector<std::pair<int, int>> vp;
 typedef std::vector<int> vi;
 typedef std::unordered_map<int, int> unmap;
 typedef std::unordered_set<int> unset;
 typedef std::unordered_set<char> unsetc;
 using namespace std;
-int nb, ns, nc;
-int pb, ps, pc;
-long long r;
-int cb, cs, cc;
-long long ans;
-char str[105];
 int mod = 1e9 + 7;
-int main()
+void solve()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
     ll n, k;
     ci(n); ci(k);
     vl arr(n);
@@ -44,10 +32,6 @@ int main()
         co(nl);
     }
     std::sort(arr.begin(), arr.end());
-    // for (auto it : arr)
-    // {
-    //     co(it); co(" ");
-    // }
     vl diff(n);
     for (int i = 1; i < n; ++i)
     {
@@ -88,5 +72,20 @@ int main()
         }
         co(res); co(nl);
     }
-    return 0;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    int t;
+    ci(t);
+    while (t--)
+    {
+        solve();
+    }
 }
