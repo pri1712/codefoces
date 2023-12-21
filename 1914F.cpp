@@ -3,25 +3,40 @@
 #include <vector>
 #include <cmath>
 #include <map>
-#define ci(n) cin>>n;
-#define nl '\n';
-#define co(n) cout<<n;
-#define LLMAX LLONG_MAX;
+#define ci(n) cin>>n
+#define co(n) cout<<n
+#define nl '\n'
+#define LLMAX LLONG_MAX
+#define r0 return 0
+#define rall(x) (x).rbegin(), (x).rend()
+#define all(x) (x).begin(), (x).end()
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
+typedef std::vector<std::pair<int, int>> vp;
 typedef std::vector<int> vi;
 typedef std::unordered_map<int, int> unmap;
 typedef std::unordered_set<int> unset;
 typedef std::unordered_set<char> unsetc;
 using namespace std;
-int nb, ns, nc;
-int pb, ps, pc;
-long long r;
-int cb, cs, cc;
-long long ans;
-char str[105];
 int mod = 1e9 + 7;
+bool isodd(ll x)
+{
+    return (x % 2);
+}
+int gcd(int a , int b)
+{
+    if (b == 0) return a;
+    else return gcd(b , a % b);
+}
+int lcm( int a , int b)
+{
+    return a * b / gcd(a, b);
+}
+void solve()
+{
+
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -31,6 +46,11 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    hhdhdh;
-    return 0;
+    int t;
+    ci(t);
+    while (t--)
+    {
+        solve();
+    }
+    r0;
 }

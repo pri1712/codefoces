@@ -3,24 +3,21 @@
 #include <vector>
 #include <cmath>
 #include <map>
-#define ci(n) cin>>n;
-#define nl '\n';
-#define co(n) cout<<n;
-#define LLMAX LLONG_MAX;
+#define ci(n) cin>>n
+#define co(n) cout<<n
+#define nl '\n'
+#define r0 return 0
+#define LLMAX LLONG_MAX
+#define all(x) (x).begin(), (x).end()
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
+typedef std::vector<std::pair<int, int>> vp;
 typedef std::vector<int> vi;
 typedef std::unordered_map<int, int> unmap;
 typedef std::unordered_set<int> unset;
 typedef std::unordered_set<char> unsetc;
 using namespace std;
-int nb, ns, nc;
-int pb, ps, pc;
-long long r;
-int cb, cs, cc;
-long long ans;
-char str[105];
 int mod = 1e9 + 7;
 int main()
 {
@@ -31,6 +28,11 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    hhdhdh;
-    return 0;
+    ll n, m;
+    ci(n); ci(m);
+    ll kmin, kmax;
+    kmax = (n - m + 1) * (n - m) / 2;
+    kmin = (((n / m - 1) * (n / m)) / 2) * (m - n % m) + (((n / m) * (n / m + 1)) / 2) * (n % m);
+    co(kmin); co(" "); co(kmax);
+    r0;
 }
