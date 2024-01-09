@@ -10,6 +10,7 @@
 #define LLMAX LLONG_MAX
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,32 +34,46 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
-{
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
-    }
-    return tot;
+ll modpow(ll x, ll n, ll m) {
+    if (n == 0) return 1 % m;
+    long long u = modpow(x, n / 2, m);
+    u = (u * u) % m;
+    if (n % 2 == 1) u = (u * x) % m;
+    return u;
 }
+// void sieve()
+// {
+//    for (int i = 2; i * i <= 10000000 ; i++)
+//    {
+//        if (isprime[i] == 0)
+//        {
+//            for (int j = 2 * i; j <= (int)isprime.size(); j += i)
+//                isprime[j] = 1;
+//        }
+//    }
+// }
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+    // unordered_map<ll, ll> mp;
+    // mp.reserve(1024);
+    // mp.max_load_factor(0.25);
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    ll n, k;
+    ci(n); ci(k);
+    vl a(n), b(n);
+    for (int i = 0; i < n; ++i)
     {
-        res += perm(n, i) * perm(m, t - i);
+        ci(a[i]);
     }
-    co(res);
-    r0;
+    for (int i = 0; i < n; ++i)
+    {
+        ci(b[i]);
+    }
+    ll cookie = 0;
 }

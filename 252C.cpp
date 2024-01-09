@@ -10,6 +10,7 @@
 #define LLMAX LLONG_MAX
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,15 +34,16 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
+ll modpow(ll x, ll n, ll m) {
+    if (n == 0) return 1 % m;
+    long long u = modpow(x, n / 2, m);
+    u = (u * u) % m;
+    if (n % 2 == 1) u = (u * x) % m;
+    return u;
+}
+ll nc2(ll n)
 {
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
-    }
-    return tot;
+    return n * (n - 1)  / 2;
 }
 int main()
 {
@@ -52,13 +54,21 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    ll n, d;
+    ci(n); ci(d);
+    vl arr(n);
+    for (int i = 0; i < n; ++i)
     {
-        res += perm(n, i) * perm(m, t - i);
+        ci(arr[i]);
     }
-    co(res);
+    ll res = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        ll cur = upper_bound(all(arr), arr[i] + d) - arr.begin();
+        cur = cur - i - 1; //number of pts in bw them.
+        if (cur >= 2)
+            res += nc2(cur);
+    }
+    co(res); co(nl);
     r0;
 }

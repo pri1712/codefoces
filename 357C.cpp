@@ -10,6 +10,7 @@
 #define LLMAX LLONG_MAX
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,16 +34,6 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
-{
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
-    }
-    return tot;
-}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -52,13 +43,40 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    ll n, m;
+    ci(n); ci(m);
+    set<ll> st;
+    vl arr(n + 1, 0);
+    for (int i = 1; i <= n; ++i)
     {
-        res += perm(n, i) * perm(m, t - i);
+        st.insert(i);
     }
-    co(res);
-    r0;
+    while (m--)
+    {
+        ll l, r, x;
+        ci(l); ci(r); ci(x);
+        auto il = st.lower_bound(l); //the element that is just greater than or equal to a.
+        if (il == st.end())
+            continue;
+        auto ir = st.upper_bound(r);
+        vl erasing;
+        for (auto it = il; it != ir; it++)
+        {
+            if (*it == x)
+                continue;
+            else
+            {
+                erasing.push_back(*it);
+                arr[*it] = x;
+            }
+        }
+        for (auto it : erasing)
+        {
+            st.erase(it);
+        }
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        co(arr[i]); co(" ");
+    }
 }

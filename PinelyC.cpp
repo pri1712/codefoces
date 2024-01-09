@@ -6,10 +6,11 @@
 #define ci(n) cin>>n
 #define co(n) cout<<n
 #define nl '\n'
-#define r0 return 0
 #define LLMAX LLONG_MAX
-#define all(x) (x).begin(), (x).end()
+#define r0 return 0
 #define rall(x) (x).rbegin(), (x).rend()
+#define all(x) (x).begin(), (x).end()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,15 +34,39 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
+void solve()
 {
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
+    ll n;
+    ci(n);
+    vl l(n);
+    vl r(n);
+    vl wt(n);
+    for (int i = 0; i < n; i++) ci(l[i]);
+    for (int i = 0; i < n; i++) ci(r[i]);
+    for (int i = 0; i < n; i++) ci(wt[i]);
+    vl arr;
+    vp v;
+    for (int i = 0; i < n; i++) {
+        v.push_back({l[i], 0});
+        v.push_back({r[i], 1});
     }
-    return tot;
+    vi sorting;
+    sort(wt.begin(), wt.end(), greater<int>());
+    sort(v.begin(), v.end());
+    for (auto it : v) {
+        if (it.second == 0) sorting.push_back(it.first);
+        else {
+            arr.push_back((it.first - sorting.back()));
+            sorting.pop_back();
+        }
+    }
+    sort(arr.begin(), arr.end());
+    ll res = 0;
+    for (int i = 0; i < n; i++)
+        res += (arr[i] * wt[i]);
+    co(res);
+    co(nl;)
+    return;
 }
 int main()
 {
@@ -52,13 +77,11 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    int t;
+    ci(t);
+    while (t--)
     {
-        res += perm(n, i) * perm(m, t - i);
+        solve();
     }
-    co(res);
     r0;
 }

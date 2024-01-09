@@ -10,6 +10,7 @@
 #define LLMAX LLONG_MAX
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,15 +34,14 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
+ll modpow(ll x, ll n, ll m)//calculate x^n mod m.
 {
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
-    }
-    return tot;
+    if (n == 0) return 1 % m;
+    long long u = modpow(x, n / 2, m);
+    u = (u * u) % m;
+    if (n % 2 == 1)
+        u = (u * x) % m;
+    return u;
 }
 int main()
 {
@@ -52,13 +52,25 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    int arr[6] = {0};
+    for (int i = 0; i < 6; ++i)
     {
-        res += perm(n, i) * perm(m, t - i);
+        ci(arr[i]);
     }
+    ll totarea = 0;
+    for (int i = 0; i < 3; ++i)
+    {
+        totarea += arr[i];
+    }
+    ll res = modpow(totarea, 2, 1e9);
+    // co(res); co(nl;)
+    ll a1 = arr[0];
+    ll a3 = arr[2];
+    ll a5 = arr[4];
+    a1 = modpow(a1, 2, 1e9);
+    a3 = modpow(a3, 2, 1e9);
+    a5 = modpow(a5, 2, 1e9);
+    a1 += a3 + a5;
+    res -= a1;
     co(res);
-    r0;
 }

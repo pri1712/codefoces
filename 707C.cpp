@@ -10,6 +10,7 @@
 #define LLMAX LLONG_MAX
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,15 +34,15 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
-{
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
+long long fast_power(long long a, long long b) {
+    long long res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a;
+        a = a * a;
+        b >>= 1;
     }
-    return tot;
+    return res;
 }
 int main()
 {
@@ -52,13 +53,33 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    ll n;
+    ci(n);
+    if (n == 1 || n == 2)
     {
-        res += perm(n, i) * perm(m, t - i);
+        co(-1);
+        r0;
     }
-    co(res);
+    ll a, b;
+    if (isodd(n))
+    {
+        a = fast_power(n, 2);
+        b = a;
+        a++;
+        a /= 2;
+        b--;
+        b /= 2;
+
+    }
+    else
+    {
+        a = fast_power(n, 2);
+        b = a;
+        a /= 4;
+        b /= 4;
+        a++;
+        b--;
+    }
+    co(a); co(" "); co(b);
     r0;
 }

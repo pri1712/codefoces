@@ -24,24 +24,14 @@ bool isodd(ll x)
 {
     return (x % 2);
 }
-int gcd(int a , int b)
+ll gcd(ll a , ll b)
 {
     if (b == 0) return a;
     else return gcd(b , a % b);
 }
-int lcm( int a , int b)
+ll lcm( ll a , ll b)
 {
     return a * b / gcd(a, b);
-}
-ll perm(int n, int r)
-{
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
-    }
-    return tot;
 }
 int main()
 {
@@ -52,13 +42,41 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    ll a, b;
+    ci(a); ci(b);
+    // ll curgcd = gcd(a, b);
+    // a /= curgcd;
+    // b /= curgcd;
+    // if (abs(a - b) == 1)
+    // {
+    //     co("Equal");
+    // }
+    // else
+    // {
+    //     if (a < b)
+    //     {
+    //         co("Dasha");
+    //     }
+    //     else
+    //     {
+    //         co("Masha");
+    //     }
+    // }
+    //above is method 1.
+    //method 2:
+    ll curlcm = lcm(a, b);
+    ll masha = curlcm / b;
+    ll dasha = curlcm / a;
+    if (abs(masha - dasha) == 1)
     {
-        res += perm(n, i) * perm(m, t - i);
+        co("Equal");
     }
-    co(res);
+    else
+    {
+        if (masha > dasha)
+            co("Masha");
+        else
+            co("Dasha");
+    }
     r0;
 }

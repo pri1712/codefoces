@@ -6,10 +6,11 @@
 #define ci(n) cin>>n
 #define co(n) cout<<n
 #define nl '\n'
-#define r0 return 0
 #define LLMAX LLONG_MAX
-#define all(x) (x).begin(), (x).end()
+#define r0 return 0
 #define rall(x) (x).rbegin(), (x).rend()
+#define all(x) (x).begin(), (x).end()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
 typedef std::pair<int, int> pp;
 typedef long long ll;
 typedef std::vector<ll> vl;
@@ -33,15 +34,41 @@ int lcm( int a , int b)
 {
     return a * b / gcd(a, b);
 }
-ll perm(int n, int r)
+ll modpow(ll x, ll n, ll m)
 {
-    ll tot = 1;
-    for (int i = 0; i < r; ++i)
-    {
-        tot *= (n - i);
-        tot /= (i + 1);
+    if (n == 0) return 1 % m;
+    long long u = modpow(x, n / 2, m);
+    u = (u * u) % m;
+    if (n % 2 == 1) u = (u * x) % m;
+    return u;
+}
+void solve()
+{
+    int n;
+    string s;
+    ci(n);
+    ci(s);
+    string ans;
+    ll index = 0;
+    while (index < n) {
+        ans += s[index];
+        if (s[index] == 'a' or s[index] == 'e') {
+            if (index + 2 < n and (s[index + 2] == 'a' or s[index + 2] == 'e')) {
+                ans += '.';
+            }
+            else if (index + 1 < n) {
+                ans += s[index + 1];
+                ans += '.';
+                index += 1;
+            }
+        }
+        index += 1;
     }
-    return tot;
+    if (ans.back() == '.') {
+        ans.pop_back();
+    }
+    co(ans); co(nl);
+    return;
 }
 int main()
 {
@@ -52,13 +79,11 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ll n, m, t;
-    ci(n); ci(m); ci(t);
-    ll res = 0;
-    for (int i = 4; i <= t - 1; i++)
+    int t;
+    ci(t);
+    while (t--)
     {
-        res += perm(n, i) * perm(m, t - i);
+        solve();
     }
-    co(res);
     r0;
 }
