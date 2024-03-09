@@ -1,0 +1,35 @@
+/*
+list of data structures:
+vectors
+arrays
+adjacency list
+adjacency matrix
+edge list
+maps
+unordered maps
+sets((mono) -> insert, erase)
+multisets
+ordered sets(() -> insert, erase, find_by_order)
+unordered sets
+queues
+deques
+priority queues
+stacks(mono)
+heaps(min, max)
+disjoint set union
+binary search trees
+spanning trees(min, max)
+fenwick trees(sum, diff)
+segment trees(sum, diff, min, max, xor)
+tries
+linked lists
+ 
+list of algorithms:
+prefix/suffix sums
+binary search
+two pointers
+sliding window
+recursion
+dfs(floodfill)
+bfs
+*/

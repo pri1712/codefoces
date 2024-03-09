@@ -1,0 +1,171 @@
+#include <bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+#include <map>
+#define ci(n) cin>>n
+#define co(n) cout<<n
+#define nl '\n'
+#define LLMAX LLONG_MAX
+#define r0 return 0
+#define rall(x) (x).rbegin(), (x).rend()
+#define all(x) (x).begin(), (x).end()
+#define printstr(s) for(int i=0;i<(int)s.size();i++) { cout<<s[i];}
+typedef std::pair<int, int> pp;
+typedef long long ll;
+typedef std::vector<ll> vl;
+typedef std::vector<std::pair<int, int>> vp;
+typedef std::vector<int> vi;
+typedef std::unordered_map<int, int> unmap;
+typedef std::unordered_set<int> unset;
+typedef std::unordered_set<char> unsetc;
+using namespace std;
+ll extendedeuclidalgo(ll a, ll b, ll& x, ll& y)
+{
+    if (b == 0)
+    {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    ll x1, y1;
+    ll d = extendedeuclidalgo(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
+}
+bool isodd(ll x)
+{
+    return (x % 2);
+}
+ll gcd(ll a , ll b)
+{
+    if (b == 0) return a;
+    else return gcd(b , a % b);
+}
+ll lcm( ll a , ll b)
+{
+    return a * b / gcd(a, b);
+}
+ll modpow(ll x, ll n, ll m)
+{
+    if (n == 0) return 1 % m;
+    long long u = modpow(x, n / 2, m);
+    u = (u * u) % m;
+    if (n % 2 == 1) u = (u * x) % m;
+    return u;
+}
+ll modinv(ll a, ll mod)
+{
+    return a <= 1 ? a : mod - (long long)(mod / a) * modinv(mod % a, mod) % mod;
+}
+// void sieve()
+// {
+//     for (int i = 2; i * i <= 10000000 ; i++)
+//     {
+//         if (isprime[i] == 0)
+//         {
+//             for (int j = 2 * i; j <= (int)isprime.size(); j += i)
+//                 isprime[j] = 1;
+//         }
+//     }
+// }
+void solve()
+{
+    // unordered_map<ll, ll> mp;
+    // mp.reserve(1024);
+    // mp.max_load_factor(0.25);
+    ll n, m, k;
+    ci(n); ci(m); ci(k);
+    vector<pair<ll, ll>> a;
+    //need to store only those bw 1 to k.
+    for (int i = 0; i < n; ++i)
+    {
+        ll x; ci(x);
+        if (x <= k)
+            a.push_back({x, 1});
+    }
+    for (int i = 0; i < m; ++i)
+    {
+        ll x;
+        ci(x);
+        if (x <= k)
+            a.push_back({x, 2});
+
+    }
+    sort(all(a));
+    if ((int)a.size() < k)
+    {
+        co("NO"); co(nl);
+        return;
+    }
+    ll lastelem = 0;
+    unordered_set <ll> fr ; unordered_set<ll>sc;
+    for (int i = 0; i < (int)a.size(); ++i)
+    {
+        if (a[i].second == 1)
+        {
+            fr.insert(a[i].first);
+
+        }
+        else
+        {
+            sc.insert(a[i].first);
+        }
+        if (a[i].first > lastelem + 1)
+        {
+            co("no"); co(nl);
+            return;
+        }
+        else
+        {
+            lastelem = a[i].first;
+        }
+    }
+    ll froma = 0, fromb = 0;
+    for (int i = 1; i <= k; ++i)
+    {
+        if (fr.find(i) != fr.end() && sc.find(i) != sc.end())
+        {
+            froma++;
+            fromb++;
+        }
+        else if (fr.find(i) != fr.end())
+        {
+            froma++;
+        }
+        else if (sc.find(i) != sc.end())
+        {
+            fromb++;
+        }
+        else
+        {
+            co("no"); co(nl);
+            return;
+        }
+    }
+    if (froma >= k / 2 && fromb >= k / 2)
+    {
+        co("yes"); co(nl);
+        return;
+    }
+    co("no"); co(nl);
+    return;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    int t;
+    ci(t);
+    while (t--)
+    {
+        solve();
+    }
+    r0;
+}

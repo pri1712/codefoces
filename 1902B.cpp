@@ -53,11 +53,35 @@ ll modpow(ll x, ll n, ll m)
 //         }
 //     }
 // }
+ll n, p, l, t;
+ll binsearch(ll x)
+{
+    ll c = ((n + 6 ) / 7);
+    ll mini = min(c, 2 * x);
+    if (x * l + mini * t >= p )
+        return true;
+    return false;
+}
 void solve()
 {
     // unordered_map<ll, ll> mp;
     // mp.reserve(1024);
     // mp.max_load_factor(0.25);
+    ci(n); ci(p); ci(l); ci(t);
+    ll high = n;
+    ll low = 0, mid = 0;
+    while (low < high - 1)
+    {
+        mid = (low + high) / 2;
+        if (binsearch(mid))
+        {
+            high = mid;
+        }
+        else
+            low = mid;
+    }
+    co(n - high); co(nl);
+    return;
 }
 int main()
 {

@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <algorithm>
+#include <cstdio>
 #include <vector>
 #include <cmath>
 #include <map>
@@ -16,21 +17,35 @@ typedef long long ll;
 typedef std::vector<ll> vl;
 typedef std::vector<std::pair<int, int>> vp;
 typedef std::vector<int> vi;
-typedef std::unordered_map<int, int> unmap;
-typedef std::unordered_set<int> unset;
-typedef std::unordered_set<char> unsetc;
 using namespace std;
-int mod = 1e9 + 7;
+ll modinv(ll a, ll mod)
+{
+    return a <= 1 ? a : mod - (long long)(mod / a) * modinv(mod % a, mod) % mod;
+}
+ll extendedeuclidalgo(ll a, ll b, ll& x, ll& y)
+{
+    if (b == 0)
+    {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    ll x1, y1;
+    ll d = extendedeuclidalgo(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
+}
 bool isodd(ll x)
 {
     return (x % 2);
 }
-int gcd(int a , int b)
+ll gcd(ll a , ll b)
 {
     if (b == 0) return a;
     else return gcd(b , a % b);
 }
-int lcm( int a , int b)
+ll lcm( ll a , ll b)
 {
     return a * b / gcd(a, b);
 }
